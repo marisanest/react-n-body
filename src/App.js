@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { ResponsiveScatterPlot } from '@nivo/scatterplot'
+import data from './data/data.json';
 
-const DataGenerator = (data) => {
+const DataGenerator = () => {
     let iteration = 0
-    let dataset = data
-    let iteration_dataset = dataset[iteration]
 
     return {
         next: () => {
@@ -13,57 +12,14 @@ const DataGenerator = (data) => {
                 iteration = 0
             else
                 iteration++
-            iteration_dataset = dataset[iteration]
         },
         getData: () => {
-            return iteration_dataset
+            return data[iteration]
         },
     }
 }
 
-const dataGenerator = DataGenerator([
-        [
-            {
-                "id": "Body",
-                "data": [
-                    {
-                        "x": 0,
-                        "y": 0
-                    },
-                    {
-                        "x": 0,
-                        "y": 5
-                    }]
-            }
-        ],
-        [
-            {
-                "id": "Body",
-                "data": [
-                    {
-                        "x": 10,
-                        "y": 10
-                    },
-                    {
-                        "x": 3,
-                        "y": 8
-                    }]
-            }
-        ],
-        [
-            {
-                "id": "Body",
-                "data": [{
-                    "x": 20,
-                    "y": 20
-                },
-                    {
-                        "x": 8,
-                        "y": 15
-                    }]
-            }
-        ]
-    ])
+const dataGenerator = DataGenerator()
 
 function App() {
     const [current, setCurrent] = useState(0)
@@ -71,14 +27,12 @@ function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
             dataGenerator.next()
-            setCurrent(current + 1)
+            // setCurrent(current + 1)
         }, 2000)
         return () => clearTimeout(timer)
     }, [current, setCurrent])
 
     const data = dataGenerator.getData()
-
-    console.log(data)
 
     return (
         <div className="App">
