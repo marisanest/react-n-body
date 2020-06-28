@@ -16,6 +16,7 @@
     "reactstrap": "^8.5.1"
   },
   "scripts": {
+    "cleanup": "rm -r -fo ./node_modules/.cache",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
