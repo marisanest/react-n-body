@@ -1,6 +1,6 @@
 import React from "react";
 import colors from "../config/colors";
-import LoadingButton from "./LoadingButton";
+// import LoadingButton from "./LoadingButton";
 
 const styles = {
     container: {
@@ -28,7 +28,7 @@ const Heading = ({iteration = null}) => {
             <h2 style={styles.text}>
                 Iteration:{' '}
                 <strong style={styles.number}>{iteration}</strong>
-                <LoadingButton />
+                {/*<LoadingButton />*/}
             </h2>
         </div>
     );
